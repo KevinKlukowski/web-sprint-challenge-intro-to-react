@@ -1,4 +1,7 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+//import styled from 'styled-components';
+import Character from './components/Character';
 import './App.css';
 
 const App = () => {
@@ -9,9 +12,31 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
 
+  const [characters, setCharacter] = useState([]);
+
+ useEffect(() => {
+    axios
+      .get('https://rickandmortyapi.com/api/character/')
+      .then((res) => {
+        setCharacter(res.data.results)
+      })
+      .catch((err) => {
+        console.log('nope, not quite!')
+      })
+  }, [])
+
+
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
+      <div>
+      {characters && characters.map(char => (
+          <>
+          <Character key={char.id} character={char} />
+          <button onClick={e => setCharacter([])}>close</button>
+          </>
+        ))}
+      </div>
     </div>
   );
 }
