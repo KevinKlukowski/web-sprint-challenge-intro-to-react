@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 //import styled from 'styled-components';
 import Character from './components/Character';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -13,6 +14,7 @@ const App = () => {
   // sync up with, if any.
 
   const [characters, setCharacter] = useState([]);
+  
 
  useEffect(() => {
     axios
@@ -28,13 +30,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      <h1>Rick and Morty Characters</h1>
       <div>
+        {!characters && <loading />} 
       {characters && characters.map(char => (
-          <>
           <Character key={char.id} character={char} />
-          <button onClick={e => setCharacter([])}>close</button>
-          </>
         ))}
       </div>
     </div>
