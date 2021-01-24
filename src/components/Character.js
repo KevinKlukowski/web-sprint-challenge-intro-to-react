@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Card, Button, CardBody, CardImg, CardTitle, CardText, ListGroup, ListGroupItem, Progress } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import { MDBBtn } from 'mdbreact';
 
 export default function Character(props) {
     const {character} = props;
 
     const [likes, setLikes] = useState(0);
+    const [hates, setHates] = useState(0);
 
     return (
         <Container>
@@ -27,12 +27,19 @@ export default function Character(props) {
             <ListGroupItem>Origin: {character.origin.name}</ListGroupItem>
             <ListGroupItem>Species: {character.species}</ListGroupItem>
             <ListGroupItem>
-                <Progress animated value={likes} />
+                <Progress multi>
+                <Progress animated bar color='info' value={likes} />
+                <Progress animated bar color='danger' value={hates} />
+                </Progress>
             </ListGroupItem>
           </ListGroup>
           <CardBody>
             <Button color='primary' onClick={e => setLikes(likes + 1)}>
-            {likes} {likes > 1 ? 'Likes❤️' : 'Like❤️'}</Button>
+            {likes} {likes > 1 ? 'Likes❤️' : 'Like❤️'}
+            </Button>
+            <Button color='danger' onClick={e => setHates(hates + 1)}>
+            {hates} {hates > 1 ? 'Hates' : 'Hate'}
+            </Button>
           </CardBody>
         </Card>
         </Container> 
@@ -45,7 +52,8 @@ const Container = styled.div`
     justify-content: space-around;
     padding-bottom: 5%;
     margin: 0 auto;
-    font-family: 'Indie Flower', cursive;
+    font-family: 'TESLA';
+    font-size: 2rem;
 
     @media (max-width: 550px) {
         
