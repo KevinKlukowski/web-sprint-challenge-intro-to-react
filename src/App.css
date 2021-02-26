@@ -1,8 +1,17 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
 .Header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   color: #443e3e;
   text-shadow: 1px 1px 5px #fff;
+  font-family: 'TESLA';
 }
+
 /* write your parent styles in here for your App.js */
